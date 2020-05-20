@@ -32,7 +32,7 @@ def list_view(request):
 
 
 def detail_view(request, post_id):
-    published = Post.objects.exclude(published_date_exact=None)
+    published = Post.objects.exclude(published_date__exact=None)
     try:
         post = published.get(pk=post_id)
     except Post.DoesNotExist:
