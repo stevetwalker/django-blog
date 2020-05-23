@@ -17,7 +17,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import url, include
+from django.conf.urls import url
+from django.urls import include
 
 urlpatterns = [
     url('', include('blogging.urls')),
