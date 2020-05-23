@@ -17,13 +17,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.conf.urls import url
-from django.urls import include
+from django.urls import path, include
 
 urlpatterns = [
-    url('', include('blogging.urls')),
-    url('polling/', include('polling.urls')),
-    url('admin/', admin.site.urls),
-    url('login/', LoginView.as_view(template_name='login.html'), name="login"),
-    url('logout/', LogoutView.as_view(next_page='/'), name="logout"),
+    path('', include('blogging.urls')),
+    path('polling/', include('polling.urls')),
+    path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view(template_name='login.html'), name="login"),
+    path('logout/', LogoutView.as_view(next_page='/'), name="logout"),
 ]
