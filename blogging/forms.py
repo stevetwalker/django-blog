@@ -1,4 +1,4 @@
-"""blogging/formspy"""
+"""blogging/forms.py"""
 
 from django.forms import ModelForm
 from blogging.models import Post
