@@ -1,10 +1,13 @@
 """blogging/views.py"""
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django import forms
+from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import loader
 
 from blogging.models import Post
+from blogging.forms import PostForm
 
 def stub_view(request, *args, **kwargs):
     body = "Stub View\n\n"
@@ -39,3 +42,19 @@ def detail_view(request, post_id):
         raise Http404
     context = {'post': post}
     return render(request, 'blogging/detail.html', context)
+
+
+def add_model(request):
+    """View to add a new entry to the Post database. Works with form.py."""
+
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            model_instance = form.save(commit=False)
+            model_instance.timestamp = timezone.now()
+            model_instance.save()
+            return redirect('/')
+
+    else:
+        form = PostForm()
+        return render(request, "blogging/post-form.html", {'form': form})
